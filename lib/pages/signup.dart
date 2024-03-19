@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class SignUp extends StatefulWidget {
-  const SignUp({super.key});
+class SignUp extends StatelessWidget {
+  final void Function()? onTap;
+  const SignUp({super.key, required this.onTap});
 
-  @override
-  State<SignUp> createState() => _SignUpState();
-}
-
-class _SignUpState extends State<SignUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -186,10 +183,13 @@ class _SignUpState extends State<SignUp> {
                       "Already have an account?",
                       style: TextStyle(fontSize: 16.0),
                     ),
-                    Text(
-                      ' Sign In Now!',
-                      style:
-                          TextStyle(color: Color(0xFF7f30fe), fontSize: 16.0),
+                    GestureDetector(
+                      onTap: onTap,
+                      child: Text(
+                        ' Sign In Now!',
+                        style:
+                            TextStyle(color: Color(0xFF7f30fe), fontSize: 16.0),
+                      ),
                     )
                   ],
                 )

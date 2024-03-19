@@ -1,13 +1,27 @@
+import 'package:chat_app/auth/authservice.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 
-class SignIn extends StatefulWidget {
-  const SignIn({super.key});
+class SignIn extends StatelessWidget {
+  final void Function()? onTap;
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwController = TextEditingController();
+  SignIn({super.key, required this.onTap});
 
-  @override
-  State<SignIn> createState() => _SignInState();
-}
+  void login(BuildContext context) async {
+    final authService = AuthService();
+    try {
+      await authService.signInWithEmailPassword(
+          _emailController.text, _pwController.text);
+    } catch (e) {
+      showDialog(
+          context: context,
+          builder: (context) => AlertDialog(
+                title: Text("erroe yazebi"),
+              ));
+    }
+  }
 
-class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -70,6 +84,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(height: 10.0),
                             Container(
                               child: TextField(
+                                controller: _emailController,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.mail_outline,
@@ -91,6 +106,7 @@ class _SignInState extends State<SignIn> {
                             SizedBox(height: 10.0),
                             Container(
                               child: TextField(
+                                controller: _pwController,
                                 decoration: InputDecoration(
                                   prefixIcon: Icon(
                                     Icons.password,
@@ -123,19 +139,22 @@ class _SignInState extends State<SignIn> {
                                 child: Material(
                                   elevation: 5.0,
                                   child: Center(
-                                    child: Container(
-                                      padding: EdgeInsets.all(10),
-                                      decoration: BoxDecoration(
-                                          borderRadius:
-                                              BorderRadius.circular(10),
-                                          color: Color(0xFF7f30fe)),
-                                      child: Center(
-                                        child: Text(
-                                          "SignIn",
-                                          style: TextStyle(
-                                              fontSize: 18.0,
-                                              fontWeight: FontWeight.bold,
-                                              color: Colors.white),
+                                    child: GestureDetector(
+                                      onTap: () => login(context),
+                                      child: Container(
+                                        padding: EdgeInsets.all(10),
+                                        decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Color(0xFF7f30fe)),
+                                        child: Center(
+                                          child: Text(
+                                            "SignIn",
+                                            style: TextStyle(
+                                                fontSize: 18.0,
+                                                fontWeight: FontWeight.bold,
+                                                color: Colors.white),
+                                          ),
                                         ),
                                       ),
                                     ),
@@ -154,10 +173,13 @@ class _SignInState extends State<SignIn> {
                       "Don't have an account?",
                       style: TextStyle(fontSize: 16.0),
                     ),
-                    Text(
-                      ' Sign Up Now!',
-                      style:
-                          TextStyle(color: Color(0xFF7f30fe), fontSize: 16.0),
+                    GestureDetector(
+                      onTap: onTap,
+                      child: Text(
+                        ' Sign Up Now!',
+                        style:
+                            TextStyle(color: Color(0xFF7f30fe), fontSize: 16.0),
+                      ),
                     )
                   ],
                 )
