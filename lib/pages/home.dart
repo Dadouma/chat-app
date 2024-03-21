@@ -13,8 +13,8 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  final _auth = AuthService();
   void logout() {
-    final _auth = AuthService();
     _auth.signOut();
   }
 
@@ -67,16 +67,20 @@ class _HomeState extends State<Home> {
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    return UserTile(
-      text: userData["email"],
-      onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-                builder: (context) => Chat(
-                      receiverEmail: userData["email"],
-                    )));
-      },
-    );
+    if (userData["email"] != _auth.getCurrentUser()?.email) {
+      return UserTile(
+        text: userData["email"],
+        onTap: () {
+          Navigator.push(
+              context,
+              MaterialPageRoute(
+                  builder: (context) => Chat(
+                        receiverEmail: userData["email"],
+                      )));
+        },
+      );
+    } else {
+      return Container();
+    }
   }
 }
