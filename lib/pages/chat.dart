@@ -1,16 +1,15 @@
 import 'package:flutter/material.dart';
 
-class Chat extends StatefulWidget {
-  const Chat({super.key});
+class Chat extends StatelessWidget {
+  final String receiverEmail;
+  const Chat({super.key, required this.receiverEmail});
 
-  @override
-  State<Chat> createState() => _ChatState();
-}
-
-class _ChatState extends State<Chat> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text(receiverEmail),
+      ),
       backgroundColor: Color(0xFF553370),
       body: Container(
         margin: EdgeInsets.symmetric(vertical: 80, horizontal: 10),

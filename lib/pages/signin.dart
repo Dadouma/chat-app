@@ -1,4 +1,4 @@
-import 'package:chat_app/auth/authservice.dart';
+import 'package:chat_app/services/auth/authservice.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 

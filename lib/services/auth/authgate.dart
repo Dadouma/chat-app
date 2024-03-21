@@ -1,4 +1,4 @@
-import 'package:chat_app/auth/loginorregister.dart';
+import 'package:chat_app/services/auth/loginorregister.dart';
 import 'package:chat_app/pages/home.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
