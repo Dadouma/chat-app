@@ -1,3 +1,4 @@
+import 'package:chat_app/auth/authservice.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -8,34 +9,36 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> {
+  void logout() {
+    final _auth = AuthService();
+    _auth.signOut();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Color(0xFF553370),
+      appBar: AppBar(
+        title: Text(
+          "Home",
+          style: TextStyle(
+              color: Colors.white, fontSize: 25.0, fontWeight: FontWeight.bold),
+        ),
+        actions: [
+          IconButton(
+              onPressed: logout,
+              icon: Icon(
+                Icons.logout,
+                color: Colors.white,
+              ))
+        ],
+        backgroundColor: Color(0xFF553370),
+      ),
       body: Container(
         child: Container(
-          margin: EdgeInsets.only(top: 50, left: 15, right: 15),
+          margin: EdgeInsets.only(top: 5, left: 15, right: 15),
           child: Column(
             children: [
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    'ChatUp',
-                    style: TextStyle(
-                        fontSize: 25.0,
-                        fontWeight: FontWeight.bold,
-                        color: Color.fromARGB(255, 255, 255, 255)),
-                  ),
-                  Container(
-                    child: Icon(
-                      Icons.search,
-                      color: Color.fromARGB(255, 255, 255, 255),
-                      size: 33.0,
-                    ),
-                  )
-                ],
-              ),
               Container(
                 margin: EdgeInsets.only(top: 30),
                 height: MediaQuery.of(context).size.height / 2,

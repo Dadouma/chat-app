@@ -1,5 +1,4 @@
 import 'package:chat_app/auth/authgate.dart';
-import 'package:chat_app/auth/loginorregister.dart';
 import 'package:chat_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
