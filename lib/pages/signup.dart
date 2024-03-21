@@ -20,7 +20,7 @@ class SignUp extends StatelessWidget {
         showDialog(
             context: context,
             builder: (context) => AlertDialog(
-                  title: Text("mdp ghalet ya sayed!"),
+                  title: Text(e.toString()),
                 ));
       }
     }
@@ -134,6 +134,7 @@ class SignUp extends StatelessWidget {
                               SizedBox(height: 10.0),
                               Container(
                                 child: TextField(
+                                  obscureText: true,
                                   controller: _pwController,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
@@ -156,6 +157,7 @@ class SignUp extends StatelessWidget {
                               SizedBox(height: 10.0),
                               Container(
                                 child: TextField(
+                                  obscureText: true,
                                   controller: _confirmpwController,
                                   decoration: InputDecoration(
                                     prefixIcon: Icon(
