@@ -19,7 +19,13 @@ class UserTile extends StatelessWidget {
         decoration: BoxDecoration(
             color: Colors.white, borderRadius: BorderRadius.circular(12)),
         child: Row(
-          children: [Icon(Icons.person), Text(text)],
+          children: [
+            Icon(Icons.person),
+            Text(
+              text,
+              style: TextStyle(fontSize: 18.0),
+            )
+          ],
         ),
       ),
     );
