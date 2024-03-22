@@ -77,6 +77,7 @@ class _HomeState extends State<Home> {
                   builder: (context) => Chat(
                         receiverEmail: userData["email"],
                         receiverID: userData['uid'],
+                        receiverName: userData['username'],
                       )));
         },
       );

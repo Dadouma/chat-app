@@ -3,16 +3,33 @@ import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
-class Chat extends StatelessWidget {
+class Chat extends StatefulWidget {
   final String receiverEmail;
   final String receiverID;
-  Chat({super.key, required this.receiverEmail, required this.receiverID});
+  final String receiverName;
+  Chat(
+      {super.key,
+      required this.receiverEmail,
+      required this.receiverID,
+      required this.receiverName});
+
+  @override
+  State<Chat> createState() => _ChatState();
+}
+
+class _ChatState extends State<Chat> {
   final TextEditingController _messageController = TextEditingController();
+
   final ChatService _chatService = ChatService();
+
   final AuthService _authService = AuthService();
+
+  //FocusNode myFocusMode = FocusNode();
+
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
-      await _chatService.sendMessage(receiverID, _messageController.text);
+      await _chatService.sendMessage(
+          widget.receiverID, _messageController.text);
       _messageController.clear();
     }
   }
@@ -23,7 +40,7 @@ class Chat extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: Color(0xFF553370),
           title: Text(
-            receiverEmail,
+            widget.receiverName,
             style: TextStyle(fontSize: 22.0, color: Colors.white),
           ),
         ),
@@ -47,7 +64,7 @@ class Chat extends StatelessWidget {
   Widget _buildMessageList() {
     String senderID = _authService.getCurrentUser()!.uid;
     return StreamBuilder(
-        stream: _chatService.getMessages(receiverID, senderID),
+        stream: _chatService.getMessages(widget.receiverID, senderID),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return const Text('ERREURRR');

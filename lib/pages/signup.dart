@@ -15,7 +15,7 @@ class SignUp extends StatelessWidget {
     if (_pwController.text == _confirmpwController.text) {
       try {
         _auth.signUpWithEmailPassword(
-            _emailController.text, _pwController.text);
+            _emailController.text, _pwController.text, _nameController.text);
       } catch (e) {
         showDialog(
             context: context,
