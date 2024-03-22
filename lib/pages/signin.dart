@@ -17,7 +17,7 @@ class SignIn extends StatelessWidget {
       showDialog(
           context: context,
           builder: (context) => AlertDialog(
-                title: Text("erroe yazebi"),
+                title: Text("Error yal khou"),
               ));
     }
   }
