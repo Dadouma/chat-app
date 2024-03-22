@@ -67,7 +67,7 @@ class _HomeState extends State<Home> {
 
   Widget _buildUserListItem(
       Map<String, dynamic> userData, BuildContext context) {
-    if (userData["email"] != _auth.getCurrentUser()?.email) {
+    if (userData["email"] != _auth.getCurrentUser()!.email) {
       return UserTile(
         text: userData["email"],
         onTap: () {
@@ -76,6 +76,7 @@ class _HomeState extends State<Home> {
               MaterialPageRoute(
                   builder: (context) => Chat(
                         receiverEmail: userData["email"],
+                        receiverID: userData['uid'],
                       )));
         },
       );
