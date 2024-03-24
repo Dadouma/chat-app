@@ -52,7 +52,7 @@ class _ChatState extends State<Chat> {
 
   final ScrollController _scrollController = ScrollController();
   void scrollDown() {
-    _scrollController.animateTo(_scrollController.position.minScrollExtent,
+    _scrollController.animateTo(_scrollController.position.maxScrollExtent,
         duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
   }
 
