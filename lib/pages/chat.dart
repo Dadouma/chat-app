@@ -1,3 +1,4 @@
+import 'package:chat_app/components/my_text_field.dart';
 import 'package:chat_app/services/auth/authservice.dart';
 import 'package:chat_app/services/chat/chat_service.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,15 +25,47 @@ class _ChatState extends State<Chat> {
 
   final AuthService _authService = AuthService();
 
-  //FocusNode myFocusMode = FocusNode();
+  FocusNode myFocusMode = FocusNode();
+  @override
+  void initState() {
+    super.initState();
+    myFocusMode.addListener(() {
+      if (myFocusMode.hasFocus) {
+        Future.delayed(
+          const Duration(milliseconds: 500),
+          () => scrollDown(),
+        );
+      }
+    });
+    Future.delayed(
+      const Duration(milliseconds: 500),
+      () => scrollDown(),
+    );
+  }
 
+  @override
+  void dispose() {
+    myFocusMode.dispose();
+    _messageController.dispose();
+    super.dispose();
+  }
+
+  final ScrollController _scrollController = ScrollController();
+  void scrollDown() {
+    _scrollController.animateTo(_scrollController.position.minScrollExtent,
+        duration: const Duration(seconds: 1), curve: Curves.fastOutSlowIn);
+  }
+
+//send Message
   void sendMessage() async {
     if (_messageController.text.isNotEmpty) {
       await _chatService.sendMessage(
           widget.receiverID, _messageController.text);
       _messageController.clear();
     }
+    scrollDown();
   }
+//
 
   @override
   Widget build(BuildContext context) {
@@ -73,6 +106,7 @@ class _ChatState extends State<Chat> {
             return const Text('Loading......');
           }
           return ListView(
+            controller: _scrollController,
             children: snapshot.data!.docs
                 .map((doc) => _buildMessageItem(doc))
                 .toList(),
@@ -103,17 +137,12 @@ class _ChatState extends State<Chat> {
     return Row(
       children: [
         Expanded(
-          child: Container(
-            child: TextField(
-              controller: _messageController,
-              decoration: InputDecoration(
-                border: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10))),
-                hintText: 'Enter a Message',
-              ),
-            ),
-          ),
-        ),
+            child: MyTextField(
+          controller: _messageController,
+          hintText: "Enter a message",
+          obscureText: false,
+          focusNode: myFocusMode,
+        )),
         Container(
           margin: EdgeInsets.only(left: 2),
           decoration: BoxDecoration(
