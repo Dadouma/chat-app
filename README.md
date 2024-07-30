@@ -1,16 +1,6 @@
-# chat_app
+# Flutter
 
-A new Flutter project.
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* Developed a real-time chat application using Flutter and Firebase, aimed at providing users with a seamless
+messaging experience across mobile platforms.
+* Integrated Firebase Authentication for secure user access, enhancing chat functionality.
+* Implemented Firebase Realtime Database for instant message synchronization.
